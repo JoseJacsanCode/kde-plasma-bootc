@@ -43,6 +43,8 @@ inteira — com possibilidade de rollback caso algo dê errado.
 
 ## Sumário
 
+## Sumário
+
 1. [O que é um sistema atômico?](#1-o-que-é-um-sistema-atômico)
 2. [O que é o `bootc`?](#2-o-que-é-o-bootc)
 3. [O que vem na imagem](#3-o-que-vem-na-imagem)
@@ -50,7 +52,21 @@ inteira — com possibilidade de rollback caso algo dê errado.
 5. [Estrutura do projeto](#5-estrutura-do-projeto)
 6. [Como o `Containerfile` funciona](#6-como-o-containerfile-funciona)
 7. [Passo a passo: crie a sua versão](#7-passo-a-passo-crie-a-sua-versão)
+   - [7.1 Pré-requisitos](#71-pré-requisitos)
+   - [7.2 Crie seu repositório a partir do template](#72-crie-seu-repositório-a-partir-do-template)
+   - [7.3 Habilite as permissões de escrita](#73-habilite-as-permissões-de-escrita)
+   - [7.4 Ajuste o nome da imagem](#74-ajuste-o-nome-da-imagem-o-passo-mais-importante)
+   - [7.5 Escolha pacotes, ambiente gráfico e repositórios](#75-escolha-pacotes-ambiente-gráfico-e-repositórios)
+   - [7.6 Adicione Flatpaks](#76-adicione-flatpaks)
+   - [7.7 Personalize o sistema](#77-personalize-o-sistema)
+   - [7.8 Teste o build localmente](#78-teste-o-build-localmente-opcional-mas-recomendado)
+   - [7.9 Publique no GHCR](#79-publique-no-ghcr)
+   - [7.10 Deixe o pacote público (ou faça login)](#710-deixe-o-pacote-público-ou-faça-login)
+   - [7.11 Instale a sua imagem](#711-instale-a-sua-imagem)
+   - [7.12 Atualize depois de mudar algo](#712-atualize-depois-de-mudar-algo)
 8. [Atualização, inspeção e rollback](#8-atualização-inspeção-e-rollback)
+   - [8.1 Desativando as atualizações automáticas do Bootc](#81-desativando-as-atualizações-automáticas-do-bootc)
+   - [8.2 Personalizando as atualizações automáticas](#82-personalizando-as-atualizações-automáticas)
 9. [Cuidados importantes](#9-cuidados-importantes)
 10. [Problemas comuns](#10-problemas-comuns)
 11. [Gerando uma ISO de instalação](#11-gerando-uma-iso-de-instalação)
