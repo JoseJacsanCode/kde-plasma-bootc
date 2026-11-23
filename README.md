@@ -13,22 +13,6 @@ minimalista**, pensada como ponto de partida para quem está começando com
 `bootc`.
 
 ---
-## Comandos mais importantes do bootc
-
-## No sistema em execução (host)
-
-| Comando | O que faz |
-|---|---|
-| `bootc status` | Mostra a imagem atual (booted), a staged (próxima) e a de rollback. Aceita `--json`. |
-| `bootc upgrade` | Baixa a versão mais nova da imagem atual e a deixa preparada para o próximo boot. |
-| `bootc upgrade --check` | Só verifica se há atualização, sem baixar tudo. |
-| `bootc upgrade --apply` | Atualiza e já reinicia para aplicar. |
-| `bootc switch <imagem>` | Troca para outra imagem, por exemplo `bootc switch ghcr.io/usuario/minha-imagem:latest`. |
-| `bootc rollback` | Volta para o deployment anterior no próximo boot. |
-| `bootc edit` | Edita a especificação do host (imagem de origem etc.). |
-| `bootc usr-overlay` | Cria um overlay temporário e gravável em `/usr`, útil para testes. As mudanças somem ao reiniciar. |
-
----
 
 A proposta deste repositório é simples e didática: mostrar, do início ao fim,
 como transformar um `Containerfile` em um sistema operacional instalável,
@@ -826,6 +810,76 @@ sudo systemctl reboot
 O rollback é a maior vantagem do sistema atômico: a imagem anterior continua
 no disco. Se uma atualização quebrar o boot ou um driver, você volta com um
 comando, sem reinstalar nada.
+
+---
+## 8.1. Desativando as atualizações automáticas do Bootc
+
+O Fedora Bootc possui um timer do systemd responsável por acionar o serviço de atualização automática.
+
+Caso queira impedir que esse timer seja executado, utilize o comando:
+
+```bash
+sudo systemctl mask bootc-fetch-apply-updates.timer
+```
+
+O comando `mask` bloqueia a inicialização do timer, impedindo que ele seja acionado automaticamente.
+
+**Para conferir se o timer foi bloqueado:**
+
+```bash
+systemctl status bootc-fetch-apply-updates.timer
+```
+
+Se estiver mascarado, o systemd exibirá o estado `masked`.
+
+**Importante:** bloquear o timer não desativa o mecanismo de atualização do Bootc. Você ainda poderá atualizar o sistema manualmente:
+
+```bash
+sudo bootc upgrade
+```
+
+Para reverter a configuração e permitir novamente a execução do timer:
+
+```bash
+sudo systemctl unmask bootc-fetch-apply-updates.timer
+```
+---
+### 8.2 Personalizando as atualizações automáticas
+
+O Fedora Bootc possui serviços systemd responsáveis pelo gerenciamento das atualizações automáticas.
+
+Caso queira personalizar o comando utilizado pelo serviço de atualização, siga os passos abaixo.
+
+**1. Bloquear o timer padrão**
+
+```bash
+sudo systemctl mask bootc-fetch-apply-updates.timer
+```
+
+**2. Editar o serviço**
+
+```bash
+sudo systemctl edit bootc-fetch-apply-updates.service
+```
+
+Adicione o seguinte conteúdo:
+
+```ini
+[Service]
+ExecStart=
+ExecStart=/usr/bin/bootc upgrade --quiet
+```
+
+A primeira linha `ExecStart=` limpa o comando original antes de definir o novo comando.
+
+**3. Recarregar as configurações do systemd**
+
+```bash
+sudo systemctl daemon-reload
+```
+
+**Observação:** o bloqueio do timer padrão impede seu acionamento. Essa configuração não cria um novo agendamento automático.
+
 
 ---
 
