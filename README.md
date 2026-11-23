@@ -8,7 +8,7 @@
 ![feito com Podman](https://img.shields.io/badge/feito_com-Podman-892CA0?logo=podman&logoColor=white)
 ![compatível com Docker](https://img.shields.io/badge/compat%C3%ADvel_com-Docker-2496ED?logo=docker&logoColor=white)
 
-Uma imagem de sistema **atômico** baseada no **Fedora 45**, com um **GNOME
+Uma imagem de sistema **atômico** baseada no **Fedora 45**, com um **KDE
 minimalista**, pensada como ponto de partida para quem está começando com
 `bootc`.
 
