@@ -12,6 +12,24 @@ Uma imagem de sistema **atômico** baseada no **Fedora 45**, com um **GNOME
 minimalista**, pensada como ponto de partida para quem está começando com
 `bootc`.
 
+---
+## Comandos mais importantes do bootc
+
+## No sistema em execução (host)
+
+| Comando | O que faz |
+|---|---|
+| `bootc status` | Mostra a imagem atual (booted), a staged (próxima) e a de rollback. Aceita `--json`. |
+| `bootc upgrade` | Baixa a versão mais nova da imagem atual e a deixa preparada para o próximo boot. |
+| `bootc upgrade --check` | Só verifica se há atualização, sem baixar tudo. |
+| `bootc upgrade --apply` | Atualiza e já reinicia para aplicar. |
+| `bootc switch <imagem>` | Troca para outra imagem, por exemplo `bootc switch ghcr.io/usuario/minha-imagem:latest`. |
+| `bootc rollback` | Volta para o deployment anterior no próximo boot. |
+| `bootc edit` | Edita a especificação do host (imagem de origem etc.). |
+| `bootc usr-overlay` | Cria um overlay temporário e gravável em `/usr`, útil para testes. As mudanças somem ao reiniciar. |
+
+---
+
 A proposta deste repositório é simples e didática: mostrar, do início ao fim,
 como transformar um `Containerfile` em um sistema operacional instalável,
 publicá-lo em um registro de imagens e atualizá-lo substituindo a imagem
