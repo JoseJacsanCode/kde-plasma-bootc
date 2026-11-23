@@ -1,4 +1,4 @@
-# Fedora Bootc GNOME Minimal
+# Fedora Bootc KDE Minimal
 
 [![Use this template](https://img.shields.io/badge/Use%20this-template-2ea44f?logo=github)](https://github.com/Ferlinuxdebian/gnome-minimal/generate)
 ![feito com bootc](https://img.shields.io/badge/feito_com-bootc-51A2DA)
